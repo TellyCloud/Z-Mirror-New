@@ -1154,11 +1154,8 @@ if ospath.exists("shorteners.txt"):
                     "api_key": temp[1]
                 })
 
-if BASE_URL:
-    Popen(
-        f"gunicorn web.wserver:app --bind 0.0.0.0:{BASE_URL_PORT} --worker-class gevent --log-level error",
-        shell=True,
-    )
+PORT = environ.get('PORT')
+Popen(f"gunicorn web.wserver:app --bind 0.0.0.0:{PORT} --worker-class gevent", shell=True)
 
 if ospath.exists("accounts.zip"):
     if ospath.exists("accounts"):
